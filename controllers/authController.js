@@ -30,14 +30,14 @@ const createSendToken = catchAsync(async (user, statusCode, res, req) => {
 
   res.cookie('mm_refreshToken', refreshToken, {
     httpOnly: true,
-    // sameSite: 'none',
+    sameSite: 'none',
     secure: process.env.NODE_ENV === 'production' ? true : false,
     maxAge: 604800000, // 7 days
   });
 
   res.cookie('mm_accessToken', token, {
     httpOnly: true,
-    // sameSite: 'none',
+    sameSite: 'none',
     secure: process.env.NODE_ENV === 'production' ? true : false,
     maxAge: 1800000, // 30 minutes
   });
@@ -146,7 +146,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       // Send new access token in cookie
       res.cookie('mm_accessToken', refreshAuthToken, {
         httpOnly: true,
-        // sameSite: 'none',
+        sameSite: 'none',
         secure: process.env.NODE_ENV === 'production' ? true : false,
         maxAge: 1800000, // 30 minutes
       });
@@ -263,14 +263,14 @@ exports.logout = catchAsync(async (req, res, next) => {
   // Set cookies to expired
   res.cookie('mm_accessToken', 'loggedout', {
     httpOnly: true,
-    // sameSite: 'none',
+    sameSite: 'none',
     secure: process.env.NODE_ENV === 'production' ? true : false,
     maxAge: 0,
   });
 
   res.cookie('mm_refreshToken', 'loggedout', {
     httpOnly: true,
-    // sameSite: 'none',
+    sameSite: 'none',
     secure: process.env.NODE_ENV === 'production' ? true : false,
     maxAge: 0,
   });
