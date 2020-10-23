@@ -208,7 +208,7 @@ exports.sendAuthLink = catchAsync(async (req, res, next) => {
   const authToken = user.createAuthToken();
   await user.save({ validateBeforeSave: false });
 
-  const authLink = `${req.protocol}://${process.env.HOST}/verify#loginToken=${authToken}`;
+  const authLink = `${process.env.HOST}/verify#loginToken=${authToken}`;
 
   try {
     await new Email(user, authLink).sendMagicLink();
